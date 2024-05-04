@@ -492,41 +492,6 @@ f c d d c b d d d d d d d d c f
 ....fff................fff......
 ................................
 `;
-            case "image20":
-            case "HVertical":return img`
-................
-................
-................
-....ddddd1111...
-....ddddd12111..
-....dddddd111f..
-....ddddd111fff.
-....ddddd111fff.
-....ddddd111fff.
-....ddddd1111f..
-....ddddd11111..
-...dccccd11111..
-..dcccdd111111..
-.dcccd11c11111..
-.dddd11bc11111..
-.dddd1bbc11111..
-.dddd1bbc11111..
-.dddd1bbc11111..
-.dddd111111111..
-.dddd1bbc11111..
-.dddd1bbc11111..
-..dccbebc11b11..
-...dccc1111111..
-....dddd111111..
-....dddd11111f..
-....dddd1111fff.
-....dddd1111fff.
-....dddd1111fff.
-....dddd11111f..
-.....ddd11111...
-................
-................
-`;
             case "image21":
             case "IHorizontal":return img`
 ................................
@@ -967,6 +932,41 @@ f c d d c b d d d d d d d d c f
 ..f62d6666d26f..
 ..ff66666666ff..
 ...ff......ff...
+................
+`;
+            case "image20":
+            case "HVertical":return img`
+................
+.....eeccee.....
+....edddddde....
+...2cddddddc2...
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddccddddd..
+..ddd111111ddd..
+..11c111111c1d..
+..e1c111111c1d..
+..f11111111c1f..
+..f1111111111f..
+..f1111111111f..
+..f1c111111c1f..
+..d1ceccccec1d..
+..d1dcddddcd1d..
+..d1dddddddd1d..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..dddddddddddd..
+..fddddddddddf..
+..fd2dddddd2df..
+..ffddddddddff..
+...ff......ff...
+................
 ................
 `;
         }

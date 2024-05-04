@@ -121,4 +121,7 @@ let cards = 0
 hideCars()
 positionCar("vertical cima", 2, 1, cars[findCarById("X")])
 let holdingCar = sprites.readDataSprite(hand, "undefined")
-let targetSprite = sprites.create(assets.image`handOpened`, SpriteKind.Target)
+let targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
+game.onUpdate(function () {
+    targetSprite.setPosition(hand.left + 6, hand.top + 8)
+})

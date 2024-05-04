@@ -165,7 +165,12 @@
         "displayName": "HVertical"
     },
     "image1": {
-        "data": "hwQQABAAAAAzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMw==",
+        "data": "hwQEAAQAAAAzMwAAMzMAADMzAAAzMwAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "target"
+    },
+    "image35": {
+        "data": "hwQQABAAAAAAAADw/wAAAAAAAM/NDwAAAAAAz938AAAA/w/w3M0PAPDd/f/P3fwA8Mzd3bvdzQ8A/8zc3dvd/PD//8/d3d3N393d3d3d3c3wzMzd3d3dzQD//9zd3d3N8N3d3d3d3c3wzMzc3d3d/AD//8/d3c0PAPDd3c3M/AAAAM/M/P8PAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "handOpened"
     },

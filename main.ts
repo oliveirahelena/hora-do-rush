@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const Car = SpriteKind.create()
+    export const Target = SpriteKind.create()
 }
 function hideCars () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
@@ -119,3 +120,5 @@ cars = createCars()
 let cards = 0
 hideCars()
 positionCar("vertical cima", 2, 1, cars[findCarById("X")])
+let holdingCar = sprites.readDataSprite(hand, "undefined")
+let targetSprite = sprites.create(assets.image`handOpened`, SpriteKind.Target)

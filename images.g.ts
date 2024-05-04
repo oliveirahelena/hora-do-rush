@@ -3,25 +3,6 @@ namespace myImages {
 
     helpers._registerFactory("image", function(name: string) {
         switch(helpers.stringTrim(name)) {
-            case "image1":
-            case "handOpened":return img`
-. . . . . . . . f . . . . . . . 
-. . . . f f . f d f . f f . . . 
-. . . f d c f f d c f d c f . . 
-. . . f d c f f d c f d c f f . 
-. . . f d d c f d c f d c f d f 
-. . . . f d c f d c f d c f d c 
-. f f . f d c f d d c d c f d c 
-f c c f f d d c d d d d d c d c 
-f d d c f b d d d d d d d d d c 
-f c d d c b d d d d d d d d c f 
-. f c d d d b d d d d d d d c f 
-. . f c d d d d d d d d d d c f 
-. . . f c d d d d d d d d d c f 
-. . . . f c d d d d d d d c f . 
-. . . . . f c d d d d d c f . . 
-. . . . . . f c c c c c f . . . 
-`;
             case "image2":
             case "handClosed":return img`
 . . . . . . . . . . . . . . . . 
@@ -968,6 +949,25 @@ f c d d c b d d d d d d d d c f
 ...ff......ff...
 ................
 ................
+`;
+            case "image1":
+            case "handOpened":return img`
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
 `;
         }
         return null;

@@ -87,6 +87,14 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
     handHolding = false
     hand.setImage(assets.image`handOpened`)
 })
+function getCarWeAreOverlappingWith () {
+    for (let value of sprites.allOfKind(SpriteKind.Car)) {
+        if (value.overlapsWith(targetSprite)) {
+            return value
+        }
+    }
+    return sprites.readDataSprite(hand, "undefined")
+}
 function setNotWallInCarLocation (carSprite: Sprite, direction: string) {
     if (direction == "horizontal direita" || direction == "horizontal esquerda") {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
@@ -105,6 +113,7 @@ let posX = 0
 let tempCar: Sprite = null
 let tempCarWidth = 0
 let tempCars: Sprite[] = []
+let targetSprite: Sprite = null
 let cars: Sprite[] = []
 let handHolding = false
 let hand: Sprite = null
@@ -121,7 +130,7 @@ let cards = 0
 hideCars()
 positionCar("vertical cima", 2, 1, cars[findCarById("X")])
 let holdingCar = sprites.readDataSprite(hand, "undefined")
-let targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
+targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
 game.onUpdate(function () {
     targetSprite.setPosition(hand.left + 6, hand.top + 8)
 })

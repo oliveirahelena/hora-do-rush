@@ -33,14 +33,14 @@ namespace myTiles {
         switch(helpers.stringTrim(name)) {
             case "transito":
             case "level2":return tiles.createTilemap(hex`0a00080001080303030303030901070206060606060605070102060606060606050107020606060606060c0d010206060606060605010702060606060606050701020606060606060501070b0404040404040a07`, img`
-. 2 2 2 2 2 2 2 2 . 
-. 2 . . . . . . 2 . 
-. 2 . . . . . . 2 . 
-. 2 . . . . . . . . 
-. 2 . . . . . . 2 . 
-. 2 . . . . . . 2 . 
-. 2 . . . . . . 2 . 
-. 2 2 2 2 2 2 2 2 . 
+2 2 2 2 2 2 2 2 2 2 
+2 2 . . . . . . 2 2 
+2 2 . . . . . . 2 2 
+2 2 . . . . . . . . 
+2 2 . . . . . . 2 2 
+2 2 . . . . . . 2 2 
+2 2 . . . . . . 2 2 
+2 2 2 2 2 2 2 2 2 2 
 `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile12,myTiles.tile13], TileScale.Sixteen);
         }
         return null;

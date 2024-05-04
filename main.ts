@@ -2,6 +2,24 @@ namespace SpriteKind {
     export const Car = SpriteKind.create()
     export const Target = SpriteKind.create()
 }
+function isCarOnTopOfWall (carSprite: Sprite) {
+    if (carSprite.width >= 32) {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            if (tiles.tileAtLocationIsWall(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row))) {
+                return true
+            }
+        }
+    } else if (carSprite.height >= 32) {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            if (tiles.tileAtLocationIsWall(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)))) {
+                return true
+            }
+        }
+    }
+    return false
+}
 function hideCars () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
         value.setFlag(SpriteFlag.Ghost, true)
@@ -37,13 +55,13 @@ function findCarById (ID: string) {
     }
     return 0
 }
-function setWallInCarLocation (carSprite: Sprite, direction: string) {
-    if (direction == "horizontal direita" || direction == "horizontal esquerda") {
+function setWallInCarLocation (carSprite: Sprite) {
+    if (carSprite.width >= 32) {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
         for (let index = 0; index <= tempCarWidth; index++) {
             tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), true)
         }
-    } else if (direction == "vertical cima" || direction == "vertical baixo") {
+    } else if (carSprite.height >= 32) {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
         for (let index = 0; index <= tempCarWidth; index++) {
             tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), true)
@@ -55,6 +73,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         handHolding = true
         hand.setImage(assets.image`handClosed`)
         holdingCar = getCarWeAreOverlappingWith()
+        sprites.setDataNumber(holdingCar, "lastPosX", holdingCar.x)
+        sprites.setDataNumber(holdingCar, "lastPosY", holdingCar.y)
+        setNotWallInCarLocation(holdingCar)
     }
 })
 function createCar (image2: Image, width: number, id: string, verticalImage: Image) {
@@ -84,11 +105,18 @@ function positionCar (direcao: string, posicaoFrenteX: number, posicaoFrenteY: n
     carro.setPosition(posX, posY)
     carro.setFlag(SpriteFlag.Ghost, false)
     carro.setFlag(SpriteFlag.Invisible, false)
-    setWallInCarLocation(carro, direcao)
+    setWallInCarLocation(carro)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    if (getCarWeAreOverlappingWith()) {
+        if (isCarOnTopOfWall(holdingCar)) {
+            holdingCar.setPosition(sprites.readDataNumber(holdingCar, "lastPosX"), sprites.readDataNumber(holdingCar, "lastPosY"))
+        }
+        setWallInCarLocation(holdingCar)
+    }
     handHolding = false
     hand.setImage(assets.image`handOpened`)
+    holdingCar = sprites.readDataSprite(hand, "undefined")
 })
 function getCarWeAreOverlappingWith () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
@@ -98,13 +126,13 @@ function getCarWeAreOverlappingWith () {
     }
     return sprites.readDataSprite(hand, "undefined")
 }
-function setNotWallInCarLocation (carSprite: Sprite, direction: string) {
-    if (direction == "horizontal direita" || direction == "horizontal esquerda") {
+function setNotWallInCarLocation (carSprite: Sprite) {
+    if (carSprite.width >= 32) {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
         for (let index = 0; index <= tempCarWidth; index++) {
             tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), false)
         }
-    } else if (direction == "vertical cima" || direction == "vertical baixo") {
+    } else if (carSprite.height >= 32) {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
         for (let index = 0; index <= tempCarWidth; index++) {
             tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), false)
@@ -114,8 +142,8 @@ function setNotWallInCarLocation (carSprite: Sprite, direction: string) {
 let posY = 0
 let posX = 0
 let tempCar: Sprite = null
-let tempCarWidth = 0
 let tempCars: Sprite[] = []
+let tempCarWidth = 0
 let targetSprite: Sprite = null
 let holdingCar: Sprite = null
 let cars: Sprite[] = []
@@ -137,4 +165,9 @@ holdingCar = sprites.readDataSprite(hand, "undefined")
 targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
 game.onUpdate(function () {
     targetSprite.setPosition(hand.left + 6, hand.top + 8)
+})
+game.onUpdate(function () {
+    if (holdingCar) {
+        holdingCar.setPosition(hand.left + 2, hand.top + 3)
+    }
 })

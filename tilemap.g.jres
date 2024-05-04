@@ -16,12 +16,6 @@
         "tilemapTile": true,
         "displayName": "myTile2"
     },
-    "tile5": {
-        "data": "hwQQABAAAAC7zbu7u7vbu7vNu7u7u9u7u827u7u728vMzbu7u7vb7O7Mu7u9u9vu7s67u7272+7uzru7vbvb7u7Ou7u9u9vu7s67u7u7287szru7u7vbzMzOu7u7u9t8x867u7u722fHzru7vbvbZ3bMu7u9u9tndsy7u72722dmzLu7vbvbZg==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile3"
-    },
     "tile7": {
         "data": "hwQQABAAAABmZnbM7u7evGZmx+zu7t68ZmbHzO7u3t1mdszu7u7evGZmx+7u7t68Zmbn7u7u3rxmxuzu7u7evGZ27O7u7t68ZmbH7u7u3rxmduzu7u7evGZmx+7u7t68ZmZ37u7u3rxmdszu7u7e3WZ2zOzu7t68ZmZ2zO7u3rxmZsfs7u7evA==",
         "mimeType": "image/x-mkcd-f4",
@@ -39,12 +33,6 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "myTile7"
-    },
-    "tile21": {
-        "data": "hwQQABAAAABmxru7u7vbZmbGu7u7u9tmZsa7u7u722Zmxru7u7vbZmbGu7u9u9tmZsa7u72722Zmxru7vbvbZmbGu7u9u9tmZsa7u7u722Zmxru7u7vbZmbGu7u7u9tmZsa7u7u722Zmxru7vbvbZmbGu7u9u9tmZsa7u72722Zmxru7vbvbZg==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "myTile19"
     },
     "tile2": {
         "data": "hwQQABAAAABmzRu7sRvbZmbNu7u9u9tm3by7u727u927u7u7u7u7u7G7u7u7u7sbu7u7u7u7u7u7u7u7u7u7u9G7u7u7u7sbu7u7u7u7u7u7u7u7u7u7u7G7u7u7u7sbu7u7u7u7u7vdvLu7u7u73WbNu7u7u9tmZs27u7u722ZmzRu7sRvbZg==",
@@ -81,6 +69,18 @@
         "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true,
         "displayName": "myTile17"
+    },
+    "tile5": {
+        "data": "hwQQABAAAAC7zbu7u7vbu7vNu7u7u9u7u827u7u728vMzbu7u7vb7O7Mu7u9u9vu7s67u7272+7uzru7vbvb7u7Ou7u9u9vu7s67u7u7287szru7u7vbzOzOu7u7u9t87M67u7u722fHzru7vbvbZ8fOu7u9u9tnx867u72722fHzru7vbvbZg==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile3"
+    },
+    "tile21": {
+        "data": "hwQQABAAAAB2zru7u7vbZnbOu7u7u9tmds67u7u722Z2zru7u7vbZnbOu7u9u9tmds67u72722Z2zru7vbvbZnbOu7u9u9tmds67u7u722Z2zru7u7vbZnbOu7u7u9tmds67u7u722Zmx7u7vbvbZmbHu7u9u9tmZse7u72722Zmx7u7vbvbZg==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile19"
     },
     "level2": {
         "id": "level2",

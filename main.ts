@@ -37,8 +37,6 @@ function findCarById (ID: string) {
     return 0
 }
 function setWallInCarLocation (carSprite: Sprite, direction: string) {
-    carSprite.setFlag(SpriteFlag.Ghost, false)
-    carSprite.setFlag(SpriteFlag.Invisible, false)
     if (direction == "horizontal direita" || direction == "horizontal esquerda") {
         tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
         for (let index = 0; index <= tempCarWidth; index++) {
@@ -80,12 +78,27 @@ function positionCar (direcao: string, posicaoFrenteX: number, posicaoFrenteY: n
         posY = posicaoFrenteY * 16 + carro.height / 2
     }
     carro.setPosition(posX, posY)
+    carro.setFlag(SpriteFlag.Ghost, false)
+    carro.setFlag(SpriteFlag.Invisible, false)
     setWallInCarLocation(carro, direcao)
 }
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     handHolding = false
     hand.setImage(assets.image`handOpened`)
 })
+function setNotWallInCarLocation (carSprite: Sprite, direction: string) {
+    if (direction == "horizontal direita" || direction == "horizontal esquerda") {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), false)
+        }
+    } else if (direction == "vertical cima" || direction == "vertical baixo") {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), false)
+        }
+    }
+}
 let posY = 0
 let posX = 0
 let tempCar: Sprite = null

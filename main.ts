@@ -54,6 +54,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (getCarWeAreOverlappingWith()) {
         handHolding = true
         hand.setImage(assets.image`handClosed`)
+        holdingCar = getCarWeAreOverlappingWith()
     }
 })
 function createCar (image2: Image, width: number, id: string, verticalImage: Image) {
@@ -116,6 +117,7 @@ let tempCar: Sprite = null
 let tempCarWidth = 0
 let tempCars: Sprite[] = []
 let targetSprite: Sprite = null
+let holdingCar: Sprite = null
 let cars: Sprite[] = []
 let handHolding = false
 let hand: Sprite = null
@@ -131,7 +133,7 @@ cars = createCars()
 let cards = 0
 hideCars()
 positionCar("vertical cima", 2, 1, cars[findCarById("A")])
-let holdingCar = sprites.readDataSprite(hand, "undefined")
+holdingCar = sprites.readDataSprite(hand, "undefined")
 targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
 game.onUpdate(function () {
     targetSprite.setPosition(hand.left + 6, hand.top + 8)

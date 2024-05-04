@@ -1,332 +1,106 @@
 namespace SpriteKind {
     export const Car = SpriteKind.create()
 }
+function hideCars () {
+    for (let value of sprites.allOfKind(SpriteKind.Car)) {
+        value.setFlag(SpriteFlag.Ghost, true)
+        value.setFlag(SpriteFlag.Invisible, true)
+        tiles.setWallAt(value.tilemapLocation(), false)
+    }
+}
 function createCars () {
     tempCars = []
-    tempCar = sprites.create(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, SpriteKind.Player)
-    controller.moveSprite(tempCar)
-    sprites.setDataString(tempCar, "ID", "X")
-    sprites.setDataNumber(tempCar, "WIDTH", 2)
-    tempCars.push(tempCar)
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "A"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "B"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "C"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "D"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "E"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "F"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "G"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "H"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "I"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "J"))
-    tempCars.push(createCar(img`
-        ................................
-        ....22222222222222222222222.....
-        ...24222222222222222222222c2....
-        ..2c4222222222222222222222cc2...
-        .2cc4444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
-        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
-        .ee222e22222222222222222222e222.
-        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
-        .eeeeeefffffeeeeeeeeeeeeefeee2d.
-        .eeeeeeffffffffffffffffffeeeeee.
-        .effffeeeeeeeeeeeeeeeeeeefffeee.
-        ..fffffeeeeeefffffeeeeeefffffe..
-        ...fff........fff........ffff...
-        ................................
-        `, 2, "K"))
-    tempCars.push(createCar(img`
-        ................................................
-        ....222222222222222222222222222222222222222.....
-        ...242222222222222222222222222222222222222c2....
-        ..2c42222222222222222222222222222222222222cc2...
-        .2cc44444444444444444444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbeeb422.
-        .2ebbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbe2222.
-        .ee222eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee22222e222.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeeefe2dd.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeefeee2d.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffeeeeee.
-        .effffeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeefffeee.
-        ..fffff.............fff...............eefffffe..
-        ...fff..............fff..................ffff...
-        ................................................
-        `, 3, "O"))
-    tempCars.push(createCar(img`
-        ................................................
-        ....222222222222222222222222222222222222222.....
-        ...242222222222222222222222222222222222222c2....
-        ..2c42222222222222222222222222222222222222cc2...
-        .2cc44444444444444444444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbeeb422.
-        .2ebbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbe2222.
-        .ee222eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee22222e222.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeeefe2dd.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeefeee2d.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffeeeeee.
-        .effffeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeefffeee.
-        ..fffff.............fff...............eefffffe..
-        ...fff..............fff..................ffff...
-        ................................................
-        `, 3, "P"))
-    tempCars.push(createCar(img`
-        ................................................
-        ....222222222222222222222222222222222222222.....
-        ...242222222222222222222222222222222222222c2....
-        ..2c42222222222222222222222222222222222222cc2...
-        .2cc44444444444444444444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbeeb422.
-        .2ebbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbe2222.
-        .ee222eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee22222e222.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeeefe2dd.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeefeee2d.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffeeeeee.
-        .effffeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeefffeee.
-        ..fffff.............fff...............eefffffe..
-        ...fff..............fff..................ffff...
-        ................................................
-        `, 3, "Q"))
-    tempCars.push(createCar(img`
-        ................................................
-        ....222222222222222222222222222222222222222.....
-        ...242222222222222222222222222222222222222c2....
-        ..2c42222222222222222222222222222222222222cc2...
-        .2cc44444444444444444444444444444444444442cc42d.
-        .2c2eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebc422.
-        .22ebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbeeb422.
-        .2ebbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbe2222.
-        .ee222eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee22222e222.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeeefe2dd.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeefeee2d.
-        .eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffeeeeee.
-        .effffeeeeeeeeeeeeefffffeeeeeeeeeeeeeeeeefffeee.
-        ..fffff.............fff...............eefffffe..
-        ...fff..............fff..................ffff...
-        ................................................
-        `, 3, "R"))
+    tempCars.push(createCar(assets.image`xHorizontal`, 2, "X", assets.image`xVertical`))
+    tempCars.push(createCar(assets.image`AHorizontal`, 2, "A", assets.image`AVertical`))
+    tempCars.push(createCar(assets.image`BHorizontal`, 2, "B", assets.image`BVertical`))
+    tempCars.push(createCar(assets.image`CHorizontal`, 2, "C", assets.image`CVertical`))
+    tempCars.push(createCar(assets.image`DHorizontal`, 2, "D", assets.image`DVertical`))
+    tempCars.push(createCar(assets.image`EHorizontal`, 2, "E", assets.image`EVertical`))
+    tempCars.push(createCar(assets.image`FHorizontal`, 2, "F", assets.image`FVertical`))
+    tempCars.push(createCar(assets.image`GHorizontal`, 2, "G", assets.image`GVertical`))
+    tempCars.push(createCar(assets.image`HHorizontal`, 2, "H", assets.image`HVertical`))
+    tempCars.push(createCar(assets.image`IHorizontal`, 2, "I", assets.image`IVertical`))
+    tempCars.push(createCar(assets.image`JHorizontal`, 2, "J", assets.image`JVertical`))
+    tempCars.push(createCar(assets.image`KHorizontal`, 2, "K", assets.image`KVertical`))
+    tempCars.push(createCar(assets.image`OHorizontal`, 3, "O", assets.image`OVertical`))
+    tempCars.push(createCar(assets.image`PHorizontal`, 3, "P", assets.image`PVertical`))
+    tempCars.push(createCar(assets.image`QHorizontal`, 3, "Q", assets.image`QVertical`))
+    tempCars.push(createCar(assets.image`RHorizontal`, 3, "R", assets.image`RVertical`))
     return tempCars
 }
-function createCar (image2: Image, width: number, id: string) {
+function findCarById (ID: string) {
+    for (let value of cars) {
+        if (sprites.readDataString(value, "ID") == ID) {
+            return cars.indexOf(value)
+        }
+    }
+    return 0
+}
+function setWallInCarLocation (carSprite: Sprite, direction: string) {
+    carSprite.setFlag(SpriteFlag.Ghost, false)
+    carSprite.setFlag(SpriteFlag.Invisible, false)
+    if (direction == "horizontal direita" || direction == "horizontal esquerda") {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), true)
+        }
+    } else if (direction == "vertical cima" || direction == "vertical baixo") {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            tiles.setWallAt(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), true)
+        }
+    }
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    handHolding = true
+    hand.setImage(assets.image`handClosed`)
+})
+function createCar (image2: Image, width: number, id: string, verticalImage: Image) {
     tempCar = sprites.create(image2, SpriteKind.Car)
     sprites.setDataString(tempCar, "ID", id)
     sprites.setDataNumber(tempCar, "WIDTH", width)
-    tempCar.setFlag(SpriteFlag.Ghost, true)
-    tempCar.setFlag(SpriteFlag.Invisible, true)
+    sprites.setDataImageValue(tempCar, "verticalImage", verticalImage)
+    sprites.setDataImageValue(tempCar, "horizontalImage", image2)
     return tempCar
 }
 function positionCar (direcao: string, posicaoFrenteX: number, posicaoFrenteY: number, carro: Sprite) {
+    carro.setImage(sprites.readDataImage(carro, "horizontalImage"))
     posX = posicaoFrenteX * 16 + carro.width / 2
     posY = posicaoFrenteY * 16 + carro.height / 2
-    carro.setPosition(posX, posY)
     if (direcao == "horizontal esquerda") {
         carro.image.flipX()
-        posX = posicaoFrenteX * 16 - carro.width / 2
     } else if (direcao == "vertical baixo") {
-        carro.image.flipY()
+        carro.setImage(sprites.readDataImage(carro, "verticalImage"))
+        posX = posicaoFrenteX * 16 + carro.width / 2
+        posY = posicaoFrenteY * 16 + carro.height / 2
     } else if (direcao == "vertical cima") {
+        carro.setImage(sprites.readDataImage(carro, "verticalImage"))
         carro.image.flipY()
+        posX = posicaoFrenteX * 16 + carro.width / 2
+        posY = posicaoFrenteY * 16 + carro.height / 2
     }
-    carro.setFlag(SpriteFlag.Ghost, false)
-    carro.setFlag(SpriteFlag.Invisible, false)
-    tiles.setWallAt(carro.tilemapLocation(), true)
+    carro.setPosition(posX, posY)
+    setWallInCarLocation(carro, direcao)
 }
+controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    handHolding = false
+    hand.setImage(assets.image`handOpened`)
+})
 let posY = 0
 let posX = 0
 let tempCar: Sprite = null
+let tempCarWidth = 0
 let tempCars: Sprite[] = []
+let cars: Sprite[] = []
+let handHolding = false
+let hand: Sprite = null
 scene.setBackgroundColor(9)
 tiles.setCurrentTilemap(tilemap`transito`)
-let cars = createCars()
+hand = sprites.create(assets.image`handOpened`, SpriteKind.Player)
+controller.moveSprite(hand)
+hand.z += 100
+handHolding = false
+cars = createCars()
 let cards = 0
-positionCar("horizontal direita", 2, 1, cars[1])
+hideCars()
+positionCar("vertical cima", 2, 1, cars[findCarById("X")])

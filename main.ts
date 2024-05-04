@@ -3,7 +3,24 @@ namespace SpriteKind {
 }
 function createCars () {
     tempCars = []
-    tempCar = sprites.create(assets.image`CarroX`, SpriteKind.Player)
+    tempCar = sprites.create(img`
+        ................................
+        ....22222222222222222222222.....
+        ...24222222222222222222222c2....
+        ..2c4222222222222222222222cc2...
+        .2cc4444444444444444444442cc42d.
+        .2c2eeeeeeeeeeeeeeeeeeeeeebc422.
+        .22ebbebbbbbbbbbbbbbbbbbbeeb422.
+        .2ebbbebbbbbbbbbbbbbbbbbbbe2222.
+        .ee222e22222222222222222222e222.
+        .eeeeeefffffeeeeeeeeeeeeeefe2dd.
+        .eeeeeefffffeeeeeeeeeeeeefeee2d.
+        .eeeeeeffffffffffffffffffeeeeee.
+        .effffeeeeeeeeeeeeeeeeeeefffeee.
+        ..fffffeeeeeefffffeeeeeefffffe..
+        ...fff........fff........ffff...
+        ................................
+        `, SpriteKind.Player)
     controller.moveSprite(tempCar)
     sprites.setDataString(tempCar, "ID", "X")
     sprites.setDataNumber(tempCar, "WIDTH", 2)

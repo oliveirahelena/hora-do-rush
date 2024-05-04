@@ -168,6 +168,6 @@ game.onUpdate(function () {
 })
 game.onUpdate(function () {
     if (holdingCar) {
-        holdingCar.setPosition(hand.left + 2, hand.top + 3)
+        holdingCar.setPosition(hand.x, hand.y)
     }
 })

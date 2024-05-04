@@ -99,6 +99,8 @@ tiles.setCurrentTilemap(tilemap`transito`)
 hand = sprites.create(assets.image`handOpened`, SpriteKind.Player)
 controller.moveSprite(hand)
 hand.z += 100
+hand.setFlag(SpriteFlag.GhostThroughWalls, true)
+hand.setStayInScreen(true)
 handHolding = false
 cars = createCars()
 let cards = 0

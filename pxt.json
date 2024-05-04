@@ -2,16 +2,13 @@
     "name": "Hora do Rush",
     "description": "",
     "dependencies": {
-        "device": "*",
-        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1"
+        "device": "*"
     },
     "files": [
         "main.blocks",
         "main.ts",
         "README.md",
-        "assets.json",
-        "tilemap.g.jres",
-        "tilemap.g.ts"
+        "assets.json"
     ],
     "testFiles": [
         "test.ts"

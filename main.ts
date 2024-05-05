@@ -120,7 +120,7 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 })
 function getCarWeAreOverlappingWith () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
-        if (value.overlapsWith(targetSprite) && sprites.readDataString(value, "ID") != "X") {
+        if (value.overlapsWith(targetSprite)) {
             return value
         }
     }

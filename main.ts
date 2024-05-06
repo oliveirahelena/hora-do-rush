@@ -20,6 +20,12 @@ function isCarOnTopOfWall (carSprite: Sprite) {
     }
     return false
 }
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (holdingCar && sprites.readDataString(holdingCar, "DIRECTION").includes("vertical")) {
+        tiles.placeOnTile(hand, tiles.locationInDirection(tiles.locationOfSprite(holdingCar), CollisionDirection.Top))
+        hand.y += -8
+    }
+})
 function hideCars () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
         value.setFlag(SpriteFlag.Ghost, true)
@@ -68,55 +74,93 @@ function setWallInCarLocation (carSprite: Sprite) {
         }
     }
 }
+function positionSpriteInTileMap (mySprite: Sprite, col: number, row: number) {
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(col, row))
+    sprites.setDataNumber(mySprite, "LASTCOL", col)
+    sprites.setDataNumber(mySprite, "LASTROW", row)
+    if (sprites.readDataString(mySprite, "DIRECTION") == "vertical cima") {
+        mySprite.y = row * 16 + 16
+    } else if (sprites.readDataString(mySprite, "DIRECTION") == "vertical baixo") {
+        mySprite.y = row * 16 + 0
+    } else if (sprites.readDataString(mySprite, "DIRECTION") == "horizontal esquerda") {
+        mySprite.x = col * 16 + 16
+    } else {
+        mySprite.x = col * 16 + 0
+    }
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (getCarWeAreOverlappingWith()) {
-        handHolding = true
+    holdingCar = getCarWeAreOverlappingWith()
+    if (holdingCar) {
+        controller.moveSprite(hand, 0, 0)
         hand.setImage(assets.image`handClosed`)
-        holdingCar = getCarWeAreOverlappingWith()
         sprites.setDataNumber(holdingCar, "lastPosX", holdingCar.x)
         sprites.setDataNumber(holdingCar, "lastPosY", holdingCar.y)
-        setNotWallInCarLocation(holdingCar)
+    }
+})
+function defineCorrectImage (direction: string, car: Sprite) {
+    sprites.setDataString(car, "DIRECTION", direction)
+    car.setImage(sprites.readDataImage(car, "horizontalImage"))
+    if (direction == "horizontal esquerda") {
+        car.image.flipX()
+    } else if (direction == "vertical baixo") {
+        car.setImage(sprites.readDataImage(car, "verticalImage"))
+    } else if (direction == "vertical cima") {
+        car.setImage(sprites.readDataImage(car, "verticalImage"))
+        car.image.flipY()
+    }
+    car.setFlag(SpriteFlag.Ghost, false)
+    car.setFlag(SpriteFlag.Invisible, false)
+}
+controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (holdingCar && sprites.readDataString(holdingCar, "DIRECTION").includes("horizontal")) {
+        tiles.placeOnTile(hand, tiles.locationInDirection(tiles.locationOfSprite(holdingCar), CollisionDirection.Left))
+        hand.x += -8
     }
 })
 function createCar (image2: Image, width: number, id: string, verticalImage: Image) {
     tempCar = sprites.create(image2, SpriteKind.Car)
     sprites.setDataString(tempCar, "ID", id)
+    sprites.setDataString(tempCar, "DIRECTION", "horizontal direita")
     sprites.setDataNumber(tempCar, "WIDTH", width)
     sprites.setDataImageValue(tempCar, "verticalImage", verticalImage)
     sprites.setDataImageValue(tempCar, "horizontalImage", image2)
     return tempCar
 }
-function positionCar (direcao: string, posicaoFrenteX: number, posicaoFrenteY: number, carro: Sprite) {
-    carro.setImage(sprites.readDataImage(carro, "horizontalImage"))
-    posX = posicaoFrenteX * 16 + carro.width / 2
-    posY = posicaoFrenteY * 16 + carro.height / 2
-    if (direcao == "horizontal esquerda") {
-        carro.image.flipX()
-    } else if (direcao == "vertical baixo") {
-        carro.setImage(sprites.readDataImage(carro, "verticalImage"))
-        posX = posicaoFrenteX * 16 + carro.width / 2
-        posY = posicaoFrenteY * 16 + carro.height / 2
-    } else if (direcao == "vertical cima") {
-        carro.setImage(sprites.readDataImage(carro, "verticalImage"))
-        carro.image.flipY()
-        posX = posicaoFrenteX * 16 + carro.width / 2
-        posY = posicaoFrenteY * 16 + carro.height / 2
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (holdingCar && sprites.readDataString(holdingCar, "DIRECTION").includes("horizontal")) {
+        tiles.placeOnTile(hand, tiles.locationInDirection(tiles.locationOfSprite(holdingCar), CollisionDirection.Right))
+        hand.x += -8
     }
-    carro.setPosition(posX, posY)
-    carro.setFlag(SpriteFlag.Ghost, false)
-    carro.setFlag(SpriteFlag.Invisible, false)
-    setWallInCarLocation(carro)
-}
+})
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
-    if (getCarWeAreOverlappingWith()) {
-        if (isCarOnTopOfWall(holdingCar)) {
-            holdingCar.setPosition(sprites.readDataNumber(holdingCar, "lastPosX"), sprites.readDataNumber(holdingCar, "lastPosY"))
-        }
-        setWallInCarLocation(holdingCar)
+    if (holdingCar) {
+        hand.setImage(assets.image`handOpened`)
+        controller.moveSprite(hand, 100, 100)
+        holdingCar = sprites.readDataSprite(hand, "undefined")
     }
-    handHolding = false
-    hand.setImage(assets.image`handOpened`)
-    holdingCar = sprites.readDataSprite(hand, "undefined")
+})
+function checkIfHasACarOrWallNearBy (car: Sprite, col: number, row: number) {
+    positionSpriteInTileMap(car, col, row)
+    console.logValue("col", col)
+    console.logValue("row", row)
+    for (let value of sprites.allOfKind(SpriteKind.Car)) {
+        if (car.overlapsWith(value)) {
+            car.setPosition(sprites.readDataNumber(car, "lastPosX"), sprites.readDataNumber(car, "lastPosY"))
+            return true
+        }
+    }
+    if (tiles.tileAtLocationIsWall(tiles.getTileLocation(col, row))) {
+        car.setPosition(sprites.readDataNumber(car, "lastPosX"), sprites.readDataNumber(car, "lastPosY"))
+        return true
+    }
+    car.setPosition(sprites.readDataNumber(car, "lastPosX"), sprites.readDataNumber(car, "lastPosY"))
+    return false
+}
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (holdingCar && sprites.readDataString(holdingCar, "DIRECTION").includes("vertical")) {
+        tiles.placeOnTile(hand, tiles.locationInDirection(tiles.locationOfSprite(holdingCar), CollisionDirection.Bottom))
+        hand.y += -8
+    }
 })
 function getCarWeAreOverlappingWith () {
     for (let value of sprites.allOfKind(SpriteKind.Car)) {
@@ -139,30 +183,75 @@ function setNotWallInCarLocation (carSprite: Sprite) {
         }
     }
 }
-let posY = 0
-let posX = 0
+function isCarOnTopOfInValidTile (carSprite: Sprite) {
+    if (carSprite.width >= 32) {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            if (!(tiles.tileAtLocationEquals(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), assets.tile`myTile4`)) && !(tiles.tileAtLocationEquals(tiles.getTileLocation(carSprite.tilemapLocation().column + (index - 1), carSprite.tilemapLocation().row), assets.tile`myTile10`))) {
+                return true
+            }
+        }
+    } else if (carSprite.height >= 32) {
+        tempCarWidth = sprites.readDataNumber(carSprite, "WIDTH") - 1
+        for (let index = 0; index <= tempCarWidth; index++) {
+            if (!(tiles.tileAtLocationEquals(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), assets.tile`myTile4`)) && !(tiles.tileAtLocationEquals(tiles.getTileLocation(carSprite.tilemapLocation().column, carSprite.tilemapLocation().row + (index - 1)), assets.tile`myTile10`))) {
+                return true
+            }
+        }
+    }
+    return false
+}
+function correctPosition (car: Sprite) {
+    if (isCarOnTopOfWall(car) || isCarOnTopOfInValidTile(car)) {
+        car.setPosition(sprites.readDataNumber(car, "lastPosX"), sprites.readDataNumber(car, "lastPosY"))
+        return 0
+    }
+    tempCol = car.tilemapLocation().column
+    tempRow = car.tilemapLocation().row
+    positionSpriteInTileMap(car, tempCol, tempRow)
+    return 0
+}
+function highlightViableMoves (car: Sprite) {
+    if (sprites.readDataString(car, "DIRECTION") == "vertical cima" || sprites.readDataString(car, "DIRECTION") == "vertical baixo") {
+        for (let index = 0; index <= 4; index++) {
+            if (!(checkIfHasACarOrWallNearBy(car, sprites.readDataNumber(car, "LASTCOL"), sprites.readDataNumber(car, "LASTROW") + index))) {
+                tiles.setTileAt(tiles.getTileLocation(sprites.readDataNumber(car, "LASTCOL"), sprites.readDataNumber(car, "LASTROW") + index), assets.tile`myTile12`)
+            }
+        }
+        for (let index = 0; index <= 4; index++) {
+            if (!(checkIfHasACarOrWallNearBy(car, sprites.readDataNumber(car, "LASTCOL"), sprites.readDataNumber(car, "LASTROW") - index))) {
+                tiles.setTileAt(tiles.getTileLocation(sprites.readDataNumber(car, "LASTCOL"), sprites.readDataNumber(car, "LASTROW") - index), assets.tile`myTile12`)
+            }
+        }
+    } else if (sprites.readDataString(car, "DIRECTION") == "horizontal esquerda" || sprites.readDataString(car, "DIRECTION") == "horizontal direita") {
+    	
+    }
+}
+let tempRow = 0
+let tempCol = 0
 let tempCar: Sprite = null
 let tempCars: Sprite[] = []
 let tempCarWidth = 0
 let targetSprite: Sprite = null
 let holdingCar: Sprite = null
 let cars: Sprite[] = []
-let handHolding = false
 let hand: Sprite = null
 scene.setBackgroundColor(9)
 tiles.setCurrentTilemap(tilemap`transito`)
 hand = sprites.create(assets.image`handOpened`, SpriteKind.Player)
 controller.moveSprite(hand)
 hand.z += 100
-hand.setFlag(SpriteFlag.GhostThroughWalls, true)
 hand.setStayInScreen(true)
-handHolding = false
+hand.setFlag(SpriteFlag.GhostThroughWalls, true)
 cars = createCars()
 let cards = 0
 hideCars()
-positionCar("vertical cima", 2, 1, cars[findCarById("A")])
 holdingCar = sprites.readDataSprite(hand, "undefined")
 targetSprite = sprites.create(assets.image`target`, SpriteKind.Target)
+defineCorrectImage("horizontal direita", cars[findCarById("A")])
+positionSpriteInTileMap(cars[findCarById("A")], 3, 4)
+defineCorrectImage("vertical cima", cars[findCarById("B")])
+positionSpriteInTileMap(cars[findCarById("B")], 2, 2)
 game.onUpdate(function () {
     targetSprite.setPosition(hand.left + 6, hand.top + 8)
 })

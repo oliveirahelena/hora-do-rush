@@ -82,6 +82,12 @@
         "tilemapTile": true,
         "displayName": "myTile11"
     },
+    "tile14": {
+        "data": "hwQQABAAAABVVVVVVVVVVWXNu7u9u9tW1by7u727u121u7u7u7u7W7W7u7u7u7tbtbu7u7u7u1u1u7u7u7u7W9W7u7u7u7tbtbu7u7u7u1u1u7u7u7u7W7W7u7u7u7tbtbu7u7u7u1vVvLu7u7u7XWXNu7u7u9tWZc27u7u721ZVVVVVVVVVVQ==",
+        "mimeType": "image/x-mkcd-f4",
+        "tilemapTile": true,
+        "displayName": "myTile12"
+    },
     "level2": {
         "id": "level2",
         "mimeType": "application/mkcd-tilemap",
@@ -100,7 +106,8 @@
             "myTiles.tile10",
             "myTiles.tile11",
             "myTiles.tile12",
-            "myTiles.tile13"
+            "myTiles.tile13",
+            "myTiles.tile14"
         ],
         "displayName": "transito"
     },

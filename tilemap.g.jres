@@ -106,10 +106,19 @@
             "myTiles.tile10",
             "myTiles.tile11",
             "myTiles.tile12",
-            "myTiles.tile13",
-            "myTiles.tile14"
+            "myTiles.tile13"
         ],
         "displayName": "transito"
+    },
+    "transito1": {
+        "id": "transito1",
+        "mimeType": "application/mkcd-tilemap",
+        "data": "MTAwNjAwMDYwMDAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA==",
+        "tileset": [
+            "myTiles.transparency16",
+            "myTiles.tile6"
+        ],
+        "displayName": "transito0"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

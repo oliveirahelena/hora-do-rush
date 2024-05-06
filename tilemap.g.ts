@@ -43,7 +43,16 @@ namespace myTiles {
 2 2 . . . . . . 2 2 
 2 2 . . . . . . 2 2 
 2 2 2 2 2 2 2 2 2 2 
-`, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile12,myTiles.tile13,myTiles.tile14], TileScale.Sixteen);
+`, [myTiles.transparency16,myTiles.tile1,myTiles.tile2,myTiles.tile3,myTiles.tile4,myTiles.tile5,myTiles.tile6,myTiles.tile7,myTiles.tile8,myTiles.tile9,myTiles.tile10,myTiles.tile11,myTiles.tile12,myTiles.tile13], TileScale.Sixteen);
+            case "transito0":
+            case "transito1":return tiles.createTilemap(hex`06000600010101010101010101010101010101010101010101010101010101010101010101010101`, img`
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+`, [myTiles.transparency16,myTiles.tile6], TileScale.Sixteen);
         }
         return null;
     })
